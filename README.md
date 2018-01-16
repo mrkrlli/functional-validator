@@ -1,1 +1,1 @@
-Creating a password validator in JS, with the goal of practicing functional programming and composition.
+Creating a password validator in JS. A small exercise to practice functional programming and composition.
