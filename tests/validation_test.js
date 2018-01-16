@@ -1,7 +1,7 @@
 const test = require('tape');
 const validator = require('../src/validation');
 
-test('Basic password validator', function(assert) {
+test('Basic password validator: proper length', function(assert) {
   assert.deepEqual(
     validator.basicValidation("123"),
     { },
@@ -11,7 +11,7 @@ test('Basic password validator', function(assert) {
   assert.end();
 });
 
-test('Basic password validator', function(assert) {
+test('Basic password validator: too short', function(assert) {
   assert.deepEqual(
     validator.basicValidation("1"),
     {
@@ -25,7 +25,7 @@ test('Basic password validator', function(assert) {
   assert.end();
 });
 
-test('Basic password validator', function(assert) {
+test('Basic password validator: equal length', function(assert) {
   assert.deepEqual(
     validator.basicValidation("12"),
     {
@@ -34,6 +34,30 @@ test('Basic password validator', function(assert) {
       ]
     },
     'Given a string length === 2, return an object with proper length error'
+  );
+
+  assert.end();
+});
+
+test('Strict password validator: contains non-alphanumeric character', function(assert) {
+  assert.deepEqual(
+    validator.strictValidation("123!"),
+    { },
+    'Given string with non-alphanmeric character, return empty object'
+  );
+
+  assert.end();
+});
+
+test('Strict password validator: no non-alphanumeric character', function(assert) {
+  assert.deepEqual(
+    validator.strictValidation("123"),
+    {
+      errors: [
+        'Include a non-alphanumeric character in your password'
+      ]
+    },
+    'Given a string with NO non-alphanmeric character, return object with proper "special char" error'
   );
 
   assert.end();

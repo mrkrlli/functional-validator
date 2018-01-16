@@ -20,3 +20,23 @@ test('String length greater-than function', function(assert) {
 
   assert.end();
 });
+
+test('String matches regex', function(assert) {
+  assert.equal(
+    utils.stringMatchesRegex(/\W/)("!"),
+    true,
+    'Given a string that matches given regex, return true'
+  );
+
+  assert.end();
+});
+
+test('String does not match regex', function(assert) {
+  assert.equal(
+    utils.stringMatchesRegex(/\W/)("1"),
+    false,
+    'Given a string that does NOT matches given regex, return false'
+  );
+
+  assert.end();
+});

@@ -17,5 +17,7 @@ const basicValidators = [
 ];
 
 const basicValidation = validator(basicValidators);
+const strictValidation = validator(basicValidators);
 
 exports.basicValidation = basicValidation;
+exports.strictValidation = strictValidation;
