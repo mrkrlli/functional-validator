@@ -1,7 +1,7 @@
 const test = require('tape');
 const utils = require('../src/utils');
 
-test('String length greater-than function', function(assert) {
+test('String length greater-than provided length', function(assert) {
   assert.equal(
     utils.stringGreaterThan(2)("123"),
     true,
@@ -11,7 +11,7 @@ test('String length greater-than function', function(assert) {
   assert.end();
 });
 
-test('String length greater-than function', function(assert) {
+test('String length less than provided length', function(assert) {
   assert.equal(
     utils.stringGreaterThan(2)("1"),
     false,

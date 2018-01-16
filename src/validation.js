@@ -1,6 +1,6 @@
 const validators = require('./validators');
 
-const validator = (validators) => (stringToValidate) => {
+const validateString = (validators) => (stringToValidate) => {
   const errorMessages = validators.reduce(function checkStringWithValidator(errors, validator) {
     if (!validator.function(stringToValidate)) {
       errors.push(validator.errorMessage);
@@ -17,6 +17,6 @@ const strictValidators = [
   validators.specialCharactersValidator
 ]
 
-const strictValidation = validator(strictValidators);
+const validatePasswordStrict = validateString(strictValidators);
 
-exports.strictValidation = strictValidation;
+exports.validatePasswordStrict = validatePasswordStrict;
