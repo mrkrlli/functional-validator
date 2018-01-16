@@ -12,12 +12,11 @@ const validator = (validators) => (stringToValidate) => {
   return errorMessages.length > 0 ? { errors: errorMessages } : {};
 };
 
-const basicValidators = [
-  validators.passwordLengthValidator
-];
+const strictValidators = [
+  validators.passwordLengthValidator,
+  validators.specialCharactersValidator
+]
 
-const basicValidation = validator(basicValidators);
-const strictValidation = validator(basicValidators);
+const strictValidation = validator(strictValidators);
 
-exports.basicValidation = basicValidation;
 exports.strictValidation = strictValidation;
