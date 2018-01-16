@@ -1,9 +1,9 @@
 const test = require('tape');
 const validator = require('../src/validation');
 
-test('Basic password validator', function(assert) {
+test('Strict password validator: proper length', function(assert) {
   assert.deepEqual(
-    validator.basicValidation("123"),
+    validator.strictValidation("123!"),
     { },
     'Given a string length > 2, return an empty object'
   );
@@ -11,9 +11,9 @@ test('Basic password validator', function(assert) {
   assert.end();
 });
 
-test('Basic password validator', function(assert) {
+test('Strict password validator: too short', function(assert) {
   assert.deepEqual(
-    validator.basicValidation("1"),
+    validator.strictValidation("!"),
     {
       errors: [
         'Password length is too short'
@@ -25,15 +25,39 @@ test('Basic password validator', function(assert) {
   assert.end();
 });
 
-test('Basic password validator', function(assert) {
+test('Strict password validator: equal length', function(assert) {
   assert.deepEqual(
-    validator.basicValidation("12"),
+    validator.strictValidation("1!"),
     {
       errors: [
         'Password length is too short'
       ]
     },
     'Given a string length === 2, return an object with proper length error'
+  );
+
+  assert.end();
+});
+
+test('Strict password validator: contains non-alphanumeric character', function(assert) {
+  assert.deepEqual(
+    validator.strictValidation("123!"),
+    { },
+    'Given string with non-alphanmeric character, return empty object'
+  );
+
+  assert.end();
+});
+
+test('Strict password validator: no non-alphanumeric character', function(assert) {
+  assert.deepEqual(
+    validator.strictValidation("123"),
+    {
+      errors: [
+        'Password requires a non-alphanumeric and non-underscore character'
+      ]
+    },
+    'Given a string with NO non-alphanmeric character, return object with proper "special char" error'
   );
 
   assert.end();
