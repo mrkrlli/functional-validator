@@ -1,21 +1,26 @@
+const R = require('ramda');
 const validators = require('./validators');
 
-const validateString = (validators) => (stringToValidate) => {
-  const errorMessages = validators.reduce(function checkStringWithValidator(errors, validator) {
+const generateValidationErrors = (validators, stringToValidate) => {
+  return validators.reduce(function checkStringWithValidator(errors, validator) {
     if (!validator.function(stringToValidate)) {
       errors.push(validator.errorMessage);
     }
 
     return errors;
   }, []);
-
-  return errorMessages.length > 0 ? { errors: errorMessages } : {};
 };
+
+const addErrorsToObject = (errors) => {
+  return errors.length > 0 ? { errors: errors } : {};
+};
+
+const validateString = R.curry(R.pipe(generateValidationErrors, addErrorsToObject));
 
 const strictValidators = [
   validators.passwordLengthValidator,
   validators.specialCharactersValidator
-]
+];
 
 const validatePasswordStrict = validateString(strictValidators);
 
