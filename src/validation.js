@@ -17,10 +17,10 @@ const addErrorsToObject = (errors) => {
 
 const validateString = R.curry(R.pipe(generateValidationErrors, addErrorsToObject));
 
-const strictValidators = [
+const strictValidators = Object.freeze([
   validators.passwordLengthValidator,
   validators.specialCharactersValidator
-];
+]);
 
 const validatePasswordStrict = validateString(strictValidators);
 
